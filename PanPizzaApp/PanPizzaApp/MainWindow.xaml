@@ -4,9 +4,143 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PanPizzaApp"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
         
-    </Grid>
+        mc:Ignorable="d"
+        Title="PannPizza" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    
+    <Border BorderBrush="DarkCyan" BorderThickness="10" >       
+    
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />            
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />            
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" 
+               Grid.Column="1"
+               Grid.ColumnSpan="3"
+               Content="WELCOME to PanPIZZA"
+               FontSize="40"
+               FontStyle="Italic"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+        <Label Grid.Row="3"
+               Grid.Column="1"
+               Content="Choose size:"
+               FontSize="23"
+               Width="230"/>
+        <StackPanel Grid.Row="3"
+                    Grid.Column="3"
+                    Width="230">
+                <ComboBox Name="cmbPizzaSize"
+                          Width="auto"
+                          Height="40"
+                          Background="Blue"
+                          Foreground="Black"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" 
+                          Text="{Binding SelectedSize.PizzaSize}"
+                          ItemsSource="{Binding PizzaSize, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedSize,UpdateSourceTrigger=PropertyChanged}"
+                          />
+            </StackPanel>
+        <Label Grid.Row="5" 
+               Grid.Column="1"
+               Content="Choose ingredients:"
+               FontSize="23"
+               Width="230"/>
+        <StackPanel Grid.Row="5"
+                    Grid.Column="3">
+            <CheckBox Content="salami" FontSize="17" VerticalContentAlignment="Center"
+                          IsChecked="{Binding Salami.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="ham"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                      IsChecked="{Binding Ham.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="kulen"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                      IsChecked="{Binding Kulen.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="ketchup"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Ketchup.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="mayoneese"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Mayoneese.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="chilly"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Chilly.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="olives"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Olives.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="oregano"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Oregano.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="sesame"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Sesame.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="cheese"
+                      FontSize="17"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Cheese.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        <Button Grid.Row="7"
+                Grid.Column="1"
+                Width="160"
+                Height="30"
+                Content="Calculate amount"
+                FontSize="18"
+                Background="DarkCyan"
+                Foreground="LightCyan"
+                FontWeight="Bold"
+                HorizontalAlignment="Left"
+                Command="{Binding CalculateAmount}"/>
+        <Label Grid.Column="3"
+                Grid.Row="7"                   
+                BorderBrush="DarkCyan"
+               BorderThickness="1"
+               Visibility="Visible" Name="lblAmount" Content="{Binding TotalPrice,UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Refresh" 
+                    Grid.Row="9"
+                    Grid.Column="3"
+                    Width="160"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    FontSize="18"
+                    Background="DarkCyan"
+                    Foreground="LightCyan"
+                    FontWeight="Bold"
+                    Command="{Binding NewOrder}"/>
+        </Grid>
+    </Border>
 </Window>
