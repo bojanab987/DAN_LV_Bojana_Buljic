@@ -345,6 +345,38 @@ namespace PanPizzaApp.ViewModel
                 return true;
             }
         }
+
+        private ICommand newOrder;
+        public ICommand NewOrder
+        {
+            get
+            {
+                if (newOrder == null)
+                {
+                    newOrder = new RelayCommand(param => NewOrderExecute(), param => CanNewOrderExecute());
+                }
+                return newOrder;
+            }
+        }
+        private void NewOrderExecute()
+        {
+            try
+            {
+                SideDishesForPizza = new List<SideDish>();
+                SelectedSize=null;
+                CanChoose = true;
+                TotalPrice = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private bool CanNewOrderExecute()
+        {
+            return true;
+        }
         #endregion
+
     }
 }
