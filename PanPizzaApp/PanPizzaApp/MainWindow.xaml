@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PanPizzaApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="PannPizza" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Border BorderBrush="DarkCyan" BorderThickness="10" >       
+    
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />            
             <ColumnDefinition Width="auto" />
@@ -16,15 +18,109 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="6" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="6" />
-            <RowDefinition Height="*" />
-           
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />           
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
+        <Label Grid.Row="1" 
+               Grid.Column="1"
+               Grid.ColumnSpan="3"
+               Content="WELCOME to PanPIZZA"
+               FontSize="40"
+               FontStyle="Italic"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+        <Label Grid.Row="3"
+               Grid.Column="1"
+               Content="Choose size:"
+               FontSize="23"
+               Width="230"/>
+        <StackPanel Grid.Row="3"
+                    Grid.Column="3"
+                    Width="230">
+            <RadioButton Content="small" FontSize="18"
+                         GroupName="Size"                         
+                         HorizontalAlignment="Left" 
+                         VerticalContentAlignment="Center"
+                         x:Name="small" />
+            <!--IsChecked="{Binding Employee.Sector, 
+                         Converter={StaticResource ResourceKey=stringConverterKey},
+                         ConverterParameter=small}"--> 
+                         
+            <RadioButton Content="medium"
+                         FontSize="18"
+                         GroupName="Size"
+                         HorizontalAlignment="Left"
+                         VerticalContentAlignment="Center"
+                         x:Name="medium" />
+            <!--IsChecked="{Binding Employee.Sector, 
+                         Converter={StaticResource ResourceKey=stringConverterKey},
+                         ConverterParameter=medium}"-->
+            <RadioButton Content="large"
+                         FontSize="18"
+                         GroupName="Size"
+                         HorizontalAlignment="Left"
+                         VerticalContentAlignment="Center"
+                         x:Name="large" />
+            <!--IsChecked="{Binding Employee.Sector, 
+                         Converter={StaticResource ResourceKey=stringConverterKey},
+                         ConverterParameter=large}"-->
+        </StackPanel>
+        <Label Grid.Row="5" 
+               Grid.Column="1"
+               Content="Choose ingredients:"
+               FontSize="23"
+               Width="230"/>
+        <StackPanel Grid.Row="5"
+                    Grid.Column="3">
+            <CheckBox Content="salami" FontSize="17" VerticalContentAlignment="Center"/>
+            <CheckBox Content="ham"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            <CheckBox Content="kulen"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            <CheckBox Content="kecap"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            <CheckBox Content="mayoneese"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            <CheckBox Content="chilly"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            <CheckBox Content="olives"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            <CheckBox Content="oregano"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            <CheckBox Content="sesame"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            <CheckBox Content="cheese"
+                      FontSize="17"
+                      VerticalContentAlignment="Center" />
+            
+        </StackPanel>
+        <Button Grid.Row="7"
+                Grid.Column="1"
+                Width="150"
+                Height="30"
+                Content="Calculate amount"
+                FontSize="18"
+                HorizontalAlignment="Left"/>
+        <Label Grid.Column="3"
+                   Grid.Row="7"
+                   Content=""
+                   BorderBrush="Black"
+                   BorderThickness="1"></Label>      
+        
     </Grid>
+    </Border>
 </Window>
