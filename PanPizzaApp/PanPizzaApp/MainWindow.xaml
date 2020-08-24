@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PanPizzaApp"
+        
         mc:Ignorable="d"
         Title="PannPizza" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    
     <Border BorderBrush="DarkCyan" BorderThickness="10" >       
     
     <Grid Background="AliceBlue">
@@ -43,34 +45,17 @@
         <StackPanel Grid.Row="3"
                     Grid.Column="3"
                     Width="230">
-            <RadioButton Content="small" FontSize="18"
-                         GroupName="Size"                         
-                         HorizontalAlignment="Left" 
-                         VerticalContentAlignment="Center"
-                         x:Name="small" />
-            <!--IsChecked="{Binding Employee.Sector, 
-                         Converter={StaticResource ResourceKey=stringConverterKey},
-                         ConverterParameter=small}"--> 
-                         
-            <RadioButton Content="medium"
-                         FontSize="18"
-                         GroupName="Size"
-                         HorizontalAlignment="Left"
-                         VerticalContentAlignment="Center"
-                         x:Name="medium" />
-            <!--IsChecked="{Binding Employee.Sector, 
-                         Converter={StaticResource ResourceKey=stringConverterKey},
-                         ConverterParameter=medium}"-->
-            <RadioButton Content="large"
-                         FontSize="18"
-                         GroupName="Size"
-                         HorizontalAlignment="Left"
-                         VerticalContentAlignment="Center"
-                         x:Name="large" />
-            <!--IsChecked="{Binding Employee.Sector, 
-                         Converter={StaticResource ResourceKey=stringConverterKey},
-                         ConverterParameter=large}"-->
-        </StackPanel>
+                <ComboBox Name="cmbPizzaSize"
+                          Width="auto"
+                          Height="40"
+                          Background="Blue"
+                          Foreground="Black"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" 
+                          Text="{Binding SelectedSize.PizzaSize}"
+                          ItemsSource="{Binding PizzaSize, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedSize,UpdateSourceTrigger=PropertyChanged}"
+                          />
+            </StackPanel>
         <Label Grid.Row="5" 
                Grid.Column="1"
                Content="Choose ingredients:"
@@ -78,48 +63,72 @@
                Width="230"/>
         <StackPanel Grid.Row="5"
                     Grid.Column="3">
-            <CheckBox Content="salami" FontSize="17" VerticalContentAlignment="Center"/>
-            <CheckBox Content="ham"
+            <CheckBox Content="salami" FontSize="17" VerticalContentAlignment="Center"
+                          IsChecked="{Binding Salami.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="ham"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            <CheckBox Content="kulen"
+                      VerticalContentAlignment="Center"
+                      IsChecked="{Binding Ham.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="kulen"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            <CheckBox Content="kecap"
+                      VerticalContentAlignment="Center"
+                      IsChecked="{Binding Kulen.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="ketchup"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            <CheckBox Content="mayoneese"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Ketchup.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="mayoneese"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            <CheckBox Content="chilly"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Mayoneese.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="chilly"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            <CheckBox Content="olives"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Chilly.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="olives"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            <CheckBox Content="oregano"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Olives.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="oregano"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            <CheckBox Content="sesame"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Oregano.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="sesame"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            <CheckBox Content="cheese"
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Sesame.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Content="cheese"
                       FontSize="17"
-                      VerticalContentAlignment="Center" />
-            
-        </StackPanel>
+                      VerticalContentAlignment="Center"
+                          IsChecked="{Binding Cheese.isSelected, Mode=TwoWay}"
+                          IsEnabled="{Binding CanChoose, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
         <Button Grid.Row="7"
                 Grid.Column="1"
-                Width="150"
+                Width="160"
                 Height="30"
                 Content="Calculate amount"
                 FontSize="18"
-                HorizontalAlignment="Left"/>
+                Background="DarkCyan"
+                Foreground="LightCyan"
+                FontWeight="Bold"
+                HorizontalAlignment="Left"
+                Command="{Binding CalculateAmount}"/>
         <Label Grid.Column="3"
-                   Grid.Row="7"
-                   Content=""
-                   BorderBrush="Black"
-                   BorderThickness="1"></Label>      
+                Grid.Row="7"                   
+                BorderBrush="DarkCyan"
+               BorderThickness="1"
+               Visibility="Visible" Name="lblAmount" Content="{Binding TotalPrice,UpdateSourceTrigger=PropertyChanged}"/>
+                
         
     </Grid>
     </Border>
