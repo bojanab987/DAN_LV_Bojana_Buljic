@@ -13,27 +13,29 @@ namespace PanPizzaApp.ViewModel
     class MainWindowViewModel:ViewModelBase
     {
         MainWindow main;
-        public PanPizza pizza = new PanPizza();        
+        public PanPizza pizzaModel = new PanPizza();        
 
         public MainWindowViewModel(MainWindow mainOpen)
         {
             main = mainOpen;
-            PizzaSize = pizza.GetAllPanPizzas();
+
+            PizzaSizeList = pizzaModel.GetAllPanPizzas();
             SideDishesForPizza = new List<SideDish>();           
         }
 
         #region Properties
+        
         /// <summary>
         /// List of offered pizza sizes
         /// </summary>
-        private List<PanPizza> pizzaSize;
-        public List<PanPizza> PizzaSize
+        private List<PanPizza> pizzaSizeList;
+        public List<PanPizza> PizzaSizeList
         {
-            get { return pizzaSize; }
+            get { return pizzaSizeList; }
             set
             {
-                pizzaSize = value;
-                OnPropertyChanged("PizzaSize");
+                pizzaSizeList = value;
+                OnPropertyChanged("PizzaSizeList");
             }
         }
 
@@ -266,7 +268,7 @@ namespace PanPizzaApp.ViewModel
             {
                 if (SelectedSize == null)
                 {
-                    MessageBox.Show("Please choose size of pizza", "Notification");
+                    MessageBox.Show("Please choose size of pizzaModel", "Notification");
                 }
                 else
                 {
@@ -284,7 +286,7 @@ namespace PanPizzaApp.ViewModel
                     }
                     if (Ketchup.IsSelectedIngredient)
                     {
-                        SideDishesForPizza.Add(Kulen);
+                        SideDishesForPizza.Add(Ketchup);
                     }
                     if (Mayoneese.IsSelectedIngredient)
                     {
@@ -313,7 +315,7 @@ namespace PanPizzaApp.ViewModel
                     SelectedSize.Ingredients = SideDishesForPizza;
                     if(SideDishesForPizza==null)
                     {
-                        MessageBox.Show("Please add ingredients for pizza", "Notification");
+                        MessageBox.Show("Please add ingredients for pizzaModel", "Notification");
                     }
                     else
                     {
@@ -375,6 +377,84 @@ namespace PanPizzaApp.ViewModel
         private bool CanNewOrderExecute()
         {
             return true;
+        }
+
+        private ICommand close;
+        public ICommand Close
+        {
+            get
+            {
+                if (close == null)
+                {
+                    close = new RelayCommand(param => CloseExecute(), param => CanCloseExecute());
+                }
+                return close;
+            }
+        }
+
+        private void CloseExecute()
+        {
+            try
+            {
+                MessageBox.Show("Goodbye!");
+                main.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanCloseExecute()
+        {
+            return true;
+        }
+        #endregion
+
+        #region save
+        private ICommand save;
+        public ICommand Save
+        {
+            get
+            {
+                if (save == null)
+                {
+                    save = new RelayCommand(param => SaveExecute(), param => CanSaveExecute());
+                }
+                return save;
+            }
+        }
+
+        private void SaveExecute()
+        {
+            try
+            {
+                StringBuilder sideIng = new StringBuilder();
+                for (int i = 0; i < SideDishesForPizza.Count; i++)
+                {
+                    sideIng.Append(sideDishesForPizza[i].Ingredient + " ");
+                }
+                string message = "Order has been completed. \nPizza size: " + SelectedSize.PizzaSize + "\nSide dish ingredients: " + sideIng.ToString()+"\nTotal price: "+TotalPrice;
+                MessageBox.Show(message);               
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanSaveExecute()
+        {
+            if (!CanChoose)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
 
