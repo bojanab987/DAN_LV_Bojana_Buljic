@@ -3,7 +3,7 @@
 namespace PanPizzaApp.Model
 {
     /// <summary>
-    /// Model for side dishes for pizza
+    /// Model for side dishes for pizzaModel
     /// </summary>
     class SideDish
     {
